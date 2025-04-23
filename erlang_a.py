@@ -37,10 +37,10 @@ def min_agents_erlang_a(lambda_, mu, gamma, max_delay_prob, s_max=300):
     raise ValueError("No s found that satisfies the condition up to s_max.")
 
 # Example: 180 calls/hour → 3 calls/min, 5 min AHT (μ=0.2), 10 min patience (γ=0.1), SL = 0.1
-lambda_ = 3      # calls per minute
+lambda_ = 3    # calls per minute
 mu = 1 / 5       # 1 call per 5 minutes
 gamma = 1 / 10   # patience = 10 minutes
-max_delay_prob = 0.1  # 10% customers may wait
+max_delay_prob = 0.4  # 60% customers may wait
 
 s_needed = min_agents_erlang_a(lambda_, mu, gamma, max_delay_prob)
 print(f"Minimum agents needed: {s_needed}")
