@@ -1,21 +1,23 @@
 # Part b: Erlang A model implementation
+# Check with Erlang X calculator
 
 import numpy as np
 
 def erlang_a_stationary_probs(lambda_, mu, gamma, s, max_states=500):
     """
-    Computes stationary probabilities for the Erlang A (M/M/s+M) model.
+    Computes stationary probabilities for the Erlang model.
     Returns the full probability vector and the delay probability P(wait).
     """
-    rho = lambda_ / mu
     probs = np.zeros(max_states)
     probs[0] = 1.0  # initial value
 
     # Compute unnormalized probabilities
     for n in range(1, max_states):
         if n <= s:
+            # There is no queue
             probs[n] = probs[n - 1] * lambda_ / (n * mu)
         else:
+            # There is a queue
             probs[n] = probs[n - 1] * lambda_ / (s * mu + (n - s) * gamma)
 
     # Normalize
@@ -23,7 +25,7 @@ def erlang_a_stationary_probs(lambda_, mu, gamma, s, max_states=500):
 
     # Delay probability = sum of probabilities of all states with ≥ s customers
     delay_prob = np.sum(probs[s:])
-    return probs, delay_prob
+    return delay_prob
 
 
 def min_agents_erlang_a(lambda_, mu, gamma, max_delay_prob, s_max=300):
@@ -31,7 +33,7 @@ def min_agents_erlang_a(lambda_, mu, gamma, max_delay_prob, s_max=300):
     Finds the minimal number of agents s such that P(wait) ≤ max_delay_prob
     """
     for s in range(1, s_max):
-        _, delay_prob = erlang_a_stationary_probs(lambda_, mu, gamma, s)
+        delay_prob = erlang_a_stationary_probs(lambda_, mu, gamma, s)
         if delay_prob <= max_delay_prob:
             return s
     raise ValueError("No s found that satisfies the condition up to s_max.")
