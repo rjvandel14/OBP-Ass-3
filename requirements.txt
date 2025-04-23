@@ -1,29 +1,4 @@
-# Virtual environment
-venv/
-.env/
-
-# Python cache files
-__pycache__/
-*.py[cod]
-
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-# VS Code settings (optional)
-.vscode/
-
-# Data files
-actuals.csv
-*.data
-*.dat
-*.csv
-*.tsv
-*.xlsx
-
-# Logs or temporary files
-*.log
-*.tmp
-
-# OS-specific
-.DS_Store
-Thumbs.db
+pandas
+numpy
+matplotlib
+scikit-learn
