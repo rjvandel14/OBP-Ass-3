@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Lenovo\OneDrive\Bureaublad\Master BA\Optimization of Business Processes P 4+5 J1\OBP-Ass-3\venv
+set VIRTUAL_ENV=C:\Users\daydo\Documents\Master Business Analytics\Optimization of Business Processes\Assignment 3\OBP-Ass-3\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
