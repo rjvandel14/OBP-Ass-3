@@ -19,8 +19,7 @@ df.rename(columns={"x": "volume"}, inplace=True)
 forecast, days, wape = forecast_and_evaluate(df, week_num=260, degree=3)
 
 total_agent_hours = 0
-print("\nQuestion c: Required agents and total agent hours (Week 260)")
-print("------------------------------------------------------------")
+print("\n(c) Required agents and total agent hours")
 
 for day, volume in zip(days, forecast):
     lambda_ = volume / minutes_per_day  # calls per minute
@@ -31,8 +30,7 @@ for day, volume in zip(days, forecast):
 
 print(f"\n Total agent hours for week 260: {total_agent_hours:.1f}")
 
-print("\nQuestion d: Varying arrival rate over quarters (Week 260)")
-print("------------------------------------------------------------")
+print("\n(d) Varying arrival rate over quarters")
 
 total_agent_hours_d = 0
 
