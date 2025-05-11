@@ -75,7 +75,7 @@ plt.figure(figsize=(15, 5))
 plt.imshow(heatmap_array, aspect='auto', cmap='viridis')
 plt.xlabel('15-minute quarter of the day')
 plt.ylabel('Day of week')
-plt.title('Heatmap of Agent Requirements per 15-minute Interval (Week 260)')
+plt.title('Agent requirements per 15-minute interval (Week 260)')
 plt.yticks(ticks=np.arange(len(days)), labels=[f'Day {i+1}' for i in range(len(days))])
 plt.xticks(ticks=np.arange(56), labels=[str(i+1) for i in range(56)])
 

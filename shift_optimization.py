@@ -1,4 +1,4 @@
-# Part e: Integer Linear Optimization
+# Part e: ILO
 import pulp 
 import numpy as np
 
