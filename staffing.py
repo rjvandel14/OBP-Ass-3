@@ -1,6 +1,7 @@
 # 	Parts c + d: Required agents & hours
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from erlang_a import min_agents_erlang_a 
 from forecasting import forecast_and_evaluate
 
@@ -51,4 +52,41 @@ for day, volume in zip(days, forecast):
     total_agent_hours_d += agent_hours
     print(f"Day {day}: total volume={volume:.0f} → {agent_hours:.2f} agent-hours")
 
+# result total number of agent hours
 print(f"\n Total agent-hours for week 260 (linear ramp-up): {total_agent_hours_d:.2f}")
+
+
+# heatmap agents required per 15 minutes
+heatmap_data = []
+
+for day, volume in zip(days, forecast):
+    quarters = 56
+    weights = np.arange(1, quarters + 1)
+    weight_sum = np.sum(weights)
+    arrivals_per_quarter = volume * (weights / weight_sum)
+    lambda_per_quarter = arrivals_per_quarter / 15  # calls per minute
+
+    agents_per_quarter = [min_agents_erlang_a(lam, mu, gamma, max_delay_prob) for lam in lambda_per_quarter]
+    heatmap_data.append(agents_per_quarter)
+
+heatmap_array = np.array(heatmap_data)
+
+plt.figure(figsize=(15, 5))
+plt.imshow(heatmap_array, aspect='auto', cmap='viridis')
+plt.xlabel('15-minute quarter of the day')
+plt.ylabel('Day of week')
+plt.title('Heatmap of Agent Requirements per 15-minute Interval (Week 260)')
+plt.yticks(ticks=np.arange(len(days)), labels=[f'Day {i+1}' for i in range(len(days))])
+plt.xticks(ticks=np.arange(56), labels=[str(i+1) for i in range(56)])
+
+# number of required agents in cells
+for i in range(heatmap_array.shape[0]):  # day
+    for j in range(heatmap_array.shape[1]):  # quarter
+        value = heatmap_array[i, j]
+        plt.text(j, i, str(value), ha='center', va='center',
+                 color='white',
+                 fontsize=8)
+
+plt.tight_layout()
+plt.show()
+
