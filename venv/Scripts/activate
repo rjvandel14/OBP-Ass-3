@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Lenovo\OneDrive\Bureaublad\Master BA\Optimization of Business Processes P 4+5 J1\OBP-Ass-3\venv"
+VIRTUAL_ENV="C:\Users\daydo\Documents\Master Business Analytics\Optimization of Business Processes\Assignment 3\OBP-Ass-3\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
