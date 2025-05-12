@@ -54,3 +54,5 @@ for day, volume in zip(days, forecast):
     print(f"Day {day}: total volume={volume:.0f} → {agent_hours:.2f} agent-hours")
 
 print(f"\n Total agent-hours for week 260 (linear ramp-up): {total_agent_hours_d:.2f}")
+
+# NOG DOEN: HOEVEEL AGENTS HEB JE NODIG OP ELK TIJDSSTIP (PER KWARTIER / HALFUUR / UUR)
