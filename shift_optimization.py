@@ -14,7 +14,7 @@ shift_patterns = [
     [0, 0, 8, 8, 8, 0, 0],   # wednesday, thursday, friday
     [0, 0, 0, 8, 8, 8, 0],   # thursday, friday, saturday
     [0, 0, 0, 0, 8, 8, 8],   # friday, saturday, sunday
-    # 4x6h shifts (Mon-Thu to Thu-Sun)
+    # 4x6h shifts
     [6, 6, 6, 6, 0, 0, 0],   # monday to thursday
     [0, 6, 6, 6, 6, 0, 0],   # tuesday to friday
     [0, 0, 6, 6, 6, 6, 0],   # wednesday to saturday
@@ -43,7 +43,7 @@ solver = pulp.PULP_CBC_CMD(msg=False)
 model.solve(solver)
 
 
-print("Optimal Shift Assignments:")
+print("Optimal shift assignments:")
 total_hours = 0
 for i in range(num_shifts):
     shift_count = int(pulp.value(x[i]))
