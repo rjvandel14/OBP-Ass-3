@@ -90,5 +90,3 @@ for i in range(heatmap_array.shape[0]):  # day
 plt.tight_layout()
 plt.show()
 
-
-# NOG DOEN: HOEVEEL AGENTS HEB JE NODIG OP ELK TIJDSSTIP (PER KWARTIER / HALFUUR / UUR)
