@@ -36,6 +36,11 @@ def forecast_and_evaluate(df, week_num=260, degree=3):
     model = LinearRegression()
     model.fit(X_train, train["log_volume"])
 
+    # Predict on training set and compute Train WAPE
+    train["log_pred"] = model.predict(X_train)
+    train["y_pred"] = np.exp(train["log_pred"])
+    train_wape = np.sum(np.abs(train["y_pred"] - train["volume"])) / np.sum(train["volume"])
+
     # Predict test + compute WAPE
     test["log_pred"] = model.predict(X_test)
     test["y_pred"] = np.exp(test["log_pred"])
@@ -63,17 +68,16 @@ def forecast_and_evaluate(df, week_num=260, degree=3):
     X_future = np.hstack([X_future_poly, dow_dummies.values, future_df[["year_sin", "year_cos"]].values])
     forecast = np.exp(model.predict(X_future))
 
-    return forecast, future_days, wape
+    return forecast, future_days, wape, train_wape
 
 # Load and clean data
 df = pd.read_csv("actuals.csv", index_col=0)
 df.rename(columns={"x": "volume"}, inplace=True)
 
-# Get forecast + WAPE
-forecast, days, wape = forecast_and_evaluate(df, week_num=260, degree=3)
+forecast, days, test_wape, train_wape = forecast_and_evaluate(df, week_num=260, degree=3)
 
-# Print output
-print(f"WAPE on test set: {wape:.2%}\n")
+print(f"Train WAPE: {train_wape:.2%}")
+print(f"Test WAPE:  {test_wape:.2%}\n")
 print("Forecast for week 260:")
 for day, vol in zip(days, forecast):
     print(f"Day {day}: {vol:.0f}")

@@ -17,7 +17,7 @@ df = pd.read_csv("actuals.csv", index_col=0)
 df.rename(columns={"x": "volume"}, inplace=True)
 
 # Get forecasted volumes for week 260 (days 1813–1819)
-forecast, days, wape = forecast_and_evaluate(df, week_num=260, degree=3)
+forecast, days, wape, test_wape = forecast_and_evaluate(df, week_num=260, degree=3)
 
 total_agent_hours = 0
 print("\n(c) Required agents and total agent hours")
