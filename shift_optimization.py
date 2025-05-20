@@ -4,7 +4,7 @@ import numpy as np
 
 # required agent-hours per day from (d)
 required_hours = [105.25, 539.00, 454.25, 389.75, 456.75, 371.75, 151.25]
-required_hours = [int(np.ceil(h)) for h in required_hours]  # rounding up
+required_hours = [int(np.ceil(h)) for h in required_hours] 
 
 # shift patterns from question
 shift_patterns = [

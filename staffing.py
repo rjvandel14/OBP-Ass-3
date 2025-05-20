@@ -6,8 +6,8 @@ from erlang_a import min_agents_erlang_a
 from forecasting import forecast_and_evaluate
 
 # Parameters
-mu = 1 / 5        # Service rate (calls per minute)
-gamma = 1 / 10    # Abandonment rate (per minute)
+mu = 1 / 5       
+gamma = 1 / 10   
 max_delay_prob = 0.4
 opening_hours = 14
 minutes_per_day = opening_hours * 60
@@ -23,7 +23,7 @@ total_agent_hours = 0
 print("\n(c) Required agents and total agent hours")
 
 for day, volume in zip(days, forecast):
-    lambda_ = volume / minutes_per_day  # calls per minute
+    lambda_ = volume / minutes_per_day  
     agents = min_agents_erlang_a(lambda_, mu, gamma, max_delay_prob)
     daily_hours = agents * opening_hours
     total_agent_hours += daily_hours
@@ -37,12 +37,12 @@ total_agent_hours_d = 0
 
 for day, volume in zip(days, forecast):
     quarters = 56  # 14 hours × 4
-    weights = np.arange(1, quarters + 1)  # linear ramp: 1 → 56
+    weights = np.arange(1, quarters + 1)  
     weight_sum = np.sum(weights)
 
     # Arrival per quarter: total volume distributed by weight
     arrivals_per_quarter = volume * (weights / weight_sum)
-    lambda_per_quarter = arrivals_per_quarter / 15  # 15 minutes per quarter → calls per minute
+    lambda_per_quarter = arrivals_per_quarter / 15 
 
     agent_hours = 0
     for lam in lambda_per_quarter:
@@ -64,7 +64,7 @@ for day, volume in zip(days, forecast):
     weights = np.arange(1, quarters + 1)
     weight_sum = np.sum(weights)
     arrivals_per_quarter = volume * (weights / weight_sum)
-    lambda_per_quarter = arrivals_per_quarter / 15  # calls per minute
+    lambda_per_quarter = arrivals_per_quarter / 15 
 
     agents_per_quarter = [min_agents_erlang_a(lam, mu, gamma, max_delay_prob) for lam in lambda_per_quarter]
     heatmap_data.append(agents_per_quarter)

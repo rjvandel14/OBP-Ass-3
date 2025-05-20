@@ -7,10 +7,6 @@ import numpy as np
 import pandas as pd
 
 def forecast_and_evaluate(df, week_num=260, degree=3):
-    """
-    Forecast week `week_num` using polynomial regression with seasonality.
-    Returns forecasted daily volumes and WAPE on last 70 days.
-    """
     df = df.copy()
     df["day"] = np.arange(1, len(df)+1)
     df["log_volume"] = np.log(df["volume"])
@@ -62,7 +58,7 @@ def forecast_and_evaluate(df, week_num=260, degree=3):
     for col in seasonal_cols:
         if col not in dow_dummies:
             dow_dummies[col] = 0
-    dow_dummies = dow_dummies[seasonal_cols[:-2]]  # exclude sin/cos already in future_df
+    dow_dummies = dow_dummies[seasonal_cols[:-2]]  
 
     X_future_poly = poly.transform(future_df[["day"]])
     X_future = np.hstack([X_future_poly, dow_dummies.values, future_df[["year_sin", "year_cos"]].values])
